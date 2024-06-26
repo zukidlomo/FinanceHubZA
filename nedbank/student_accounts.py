@@ -8,6 +8,14 @@ soup = BeautifulSoup(html.content, 'html.parser')
 
 
 def get_basics():
+    """
+    Retrieves the basic information about the Migoals Youth account from the webpage.
+    
+    Returns:
+    - title (str): The title of the account.
+    - description (str): The description of the account.
+    - monthly_fee (str): The monthly maintenance fee of the account.
+    """
     migoal = soup.find('div', class_='nbd-credit-card-banner-content')
     title = migoal.find('h1').text.strip()
     description = migoal.find('p').text.strip()
@@ -17,6 +25,12 @@ def get_basics():
 
 
 def get_account_benefits():
+    """
+    Retrieves the account benefits of the Migoals Youth account from the webpage.
+    
+    Returns:
+    - categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
+    """
     benefits = soup.find_all('div', class_='card-body m-0 p-0')
     categories = {
         'Rates and fees': [],
@@ -37,12 +51,26 @@ def get_account_benefits():
 
 
 def print_basics(title, description, monthly_fee):
+    """
+    Prints the basic information of the account.
+    
+    Parameters:
+    - title (str): The title of the account.
+    - description (str): The description of the account.
+    - monthly_fee (str): The monthly maintenance fee of the account.
+    """
     print(f"Title: {title}")
     print(f"Description: {description}")
     print(f"Maintenance Fee: {monthly_fee}")
 
 
 def print_rewards(categories):
+    """
+    Prints the account benefits categorized by different categories.
+    
+    Parameters:
+    - categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
+    """
     for category, info in categories.items():
         print(f"\n{category}:")
         for item in info:
