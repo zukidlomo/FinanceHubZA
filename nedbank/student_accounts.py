@@ -21,6 +21,7 @@ def get_account_synopsis(soup):
     description = migoal.find('p').text.strip()
     monthly_fee = migoal.find('h3').text.strip()
     print_basics(title, description, monthly_fee)
+    
     return title, description, monthly_fee
 
 
@@ -29,10 +30,10 @@ def get_account_benefits():
     Retrieves the account benefits of the Migoals Youth account from the webpage.
     
     Returns:
-    - categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
+    - benefit_categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
     """
     benefits = soup.find_all('div', class_='card-body m-0 p-0')
-    categories = {
+    benefit_categories = {
         'Rates and fees': [],
         'Rewards and discounts': [],
         'Convenience and control': [],
@@ -44,10 +45,10 @@ def get_account_benefits():
         items = benefit.find_all('p')
         category_info = [item.text.strip() for item in items if item.text.strip()]
         
-        if title in categories:
-            categories[title] = category_info
+        if title in benefit_categories:
+            benefit_categories[title] = category_info
 
-    print_rewards(categories)
+    print_rewards(benefit_categories)
 
 
 def print_basics(title, description, monthly_fee):
@@ -64,14 +65,14 @@ def print_basics(title, description, monthly_fee):
     print(f"Maintenance Fee: {monthly_fee}")
 
 
-def print_rewards(categories):
+def print_rewards(benefit_categories):
     """
-    Prints the account benefits categorized by different categories.
+    Prints the account benefits categorized by different benefit_categories.
     
     Parameters:
-    - categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
+    - benefit_categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
     """
-    for category, info in categories.items():
+    for category, info in benefit_categories.items():
         print(f"\n{category}:")
         for item in info:
             print(f"- {item}")
