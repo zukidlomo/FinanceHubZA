@@ -7,7 +7,7 @@ html = requests.get(url)
 soup = BeautifulSoup(html.content, 'html.parser')
 
 
-def get_basics():
+def get_account_synopsis(soup):
     """
     Retrieves the basic information about the Migoals Youth account from the webpage.
     
@@ -78,6 +78,6 @@ def print_rewards(categories):
 
 
 if __name__ == '__main__':
-    get_basics()
+    get_account_synopsis(soup)
     get_account_benefits()
    
