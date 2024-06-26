@@ -51,6 +51,27 @@ def get_account_benefits():
     print_rewards(benefit_categories)
 
 
+def get_account_perks(soup):
+    
+    perks = soup.find_all('div', class_='nbd-way-to-pay-info')
+    perks_categories = {
+        'Movie discounts': [],
+        'Free card purchases': [],
+        'Free statements': [],
+        'Free savings pocket': []
+    }
+
+    for perk in perks:
+        title = perk.find('h4').text.strip()
+        items = perk.find_all('p')
+        category_info = [item.text.strip() for item in items if item.text.strip()]
+        
+        if title in perks_categories:
+            perks_categories[title] = category_info
+
+    print_perks(perks_categories)
+    return perks_categories
+
 def print_basics(title, description, monthly_fee):
     """
     Prints the basic information of the account.
@@ -77,8 +98,16 @@ def print_rewards(benefit_categories):
         for item in info:
             print(f"- {item}")
 
+def print_perks(perks_categories):
+     for category, info in perks_categories.items():
+        print(f"\n{category}:")
+        for item in info:
+            print(f"- {item}")
+    # print(perks)
+
 
 if __name__ == '__main__':
     get_account_synopsis(soup)
     get_account_benefits()
+    get_account_perks(soup)
    
