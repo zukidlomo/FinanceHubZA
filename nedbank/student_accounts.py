@@ -11,6 +11,9 @@ def get_account_synopsis(soup):
     """
     Retrieves the basic information about the Migoals Youth account from the webpage.
     
+    Args:
+    - soup (BeautifulSoup): The BeautifulSoup object representing the parsed HTML of the webpage.
+    
     Returns:
     - title (str): The title of the account.
     - description (str): The description of the account.
@@ -25,9 +28,12 @@ def get_account_synopsis(soup):
     return title, description, monthly_fee
 
 
-def get_account_benefits():
+def get_account_benefits(soup):
     """
     Retrieves the account benefits of the Migoals Youth account from the webpage.
+    
+    Args:
+    - soup (BeautifulSoup): The BeautifulSoup object representing the parsed HTML of the webpage.
     
     Returns:
     - benefit_categories (dict): A dictionary containing the different categories of benefits and their corresponding information.
@@ -49,10 +55,19 @@ def get_account_benefits():
             benefit_categories[title] = category_info
 
     print_rewards(benefit_categories)
+    return benefit_categories
 
 
 def get_account_perks(soup):
-    
+    """
+    Retrieves the perks associated with a student account from the given BeautifulSoup object.
+
+    Args:
+        soup (BeautifulSoup): The BeautifulSoup object containing the HTML content.
+
+    Returns:
+        dict: A dictionary containing the perks categories as keys and the associated perks as values.
+    """
     perks = soup.find_all('div', class_='nbd-way-to-pay-info')
     perks_categories = {
         'Movie discounts': [],
@@ -99,15 +114,23 @@ def print_rewards(benefit_categories):
             print(f"- {item}")
 
 def print_perks(perks_categories):
-     for category, info in perks_categories.items():
+    """
+    Prints the perks of different categories.
+
+    Args:
+        perks_categories (dict): A dictionary containing the categories as keys and a list of perks as values.
+
+    Returns:
+        None
+    """
+    for category, info in perks_categories.items():
         print(f"\n{category}:")
         for item in info:
             print(f"- {item}")
-    # print(perks)
 
 
 if __name__ == '__main__':
     get_account_synopsis(soup)
-    get_account_benefits()
+    get_account_benefits(soup)
     get_account_perks(soup)
    
