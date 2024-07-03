@@ -32,13 +32,11 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
             </div>
             <div class="card-body m-0 p-0">
                 <h5 class="card-title nb-card-heading">Rewards and discounts</h5>
-                <p>Cashback on purchases</p>
-                <p>Discounts on movie tickets</p>
+                <p>Get 50% off Nu Metro movie tickets.</p>
+                <p>Withdraw your Greenbacks as cash at any Nedbank ATM.</p>
+                <p>Enjoy Greenbacks Exclusive discounts on Avo SuperShop app.</p>
             </div>
         """
-
-        # self.assertEqual(len(benefit_categories['Rates and fees']), 2)
-        # self.assertEqual(len(benefit_categories['Rewards and discounts']), 2)
 
         soup = BeautifulSoup(mock_html, 'html.parser')
         benefit_categories = get_account_benefits(soup)
@@ -48,9 +46,18 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
             "Get free in-app transaction notifications.",
             "Add Greenbacks membership for only R30 a month."
         ])
+
+        self.assertEqual(benefit_categories["Rewards and discounts"], [
+            "Get 50% off Nu Metro movie tickets.",
+            "Withdraw your Greenbacks as cash at any Nedbank ATM.",
+            "Enjoy Greenbacks Exclusive discounts on Avo SuperShop app."
+        ])
+
+
+        self.assertEqual(len(benefit_categories['Rewards and discounts']), 3)
+        self.assertEqual(len(benefit_categories['Convenience and control']), 0)
         self.assertEqual(len(benefit_categories['Rates and fees']), 3)
-
-
+        self.assertEqual(len(benefit_categories['Security']), 0)
 
     def test_get_account_perks(self):
         pass
