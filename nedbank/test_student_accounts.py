@@ -1,5 +1,5 @@
 import unittest
-from student_accounts import *
+from nedbank.nedbank_migoals import *
 from bs4 import BeautifulSoup
 
 
@@ -58,7 +58,6 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
             "Get free in-app transaction notifications.",
             "Add Greenbacks membership for only R30 a month."
         ])
-
         self.assertEqual(benefit_categories["Rewards and discounts"], [
             "Get 50% off Nu Metro movie tickets.",
             "Withdraw your Greenbacks as cash at any Nedbank ATM.",
