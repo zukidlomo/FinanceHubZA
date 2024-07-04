@@ -21,7 +21,6 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
         self.assertEqual(monthly_fee, "R5")
 
 
-
     def test_get_account_benefits(self):
         mock_html = """
             <div class="card-body m-0 p-0">
@@ -82,9 +81,44 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
         self.assertEqual(len(benefit_categories["Rates and fees"]), 3)
         self.assertEqual(len(benefit_categories["Security"]), 4)
 
-    def test_get_account_perks(self):
-        pass
 
+    def test_get_account_perks(self):
+        mock_html = """
+            <div class="nbd-way-to-pay-info">
+                <h4>Movie discounts</h4>
+                <p>50% off at Nu Metro</p> 
+            </div>
+            <div class="nbd-way-to-pay-info">
+                <h4>Free card purchases</h4>
+                <p>Swipe your card for free at any retail store at no extra charge</p> 
+            </div>
+            <div class="nbd-way-to-pay-info">
+                <h4>Free statements</h4>
+                <p>Free statements on the Money app (up to 3 months)</p>
+            </div>
+            <div class="nbd-way-to-pay-info">
+                <h4>Free savings pocket</h4>
+                <p>Save and earn interest with a MyPocket savings account</p>
+            </div>
+        """
+        
+        soup = BeautifulSoup(mock_html, 'html.parser')
+        perk_categories = get_account_perks(soup)
+
+        self.assertEqual(perk_categories["Movie discounts"], [
+            "50% off at Nu Metro"
+        ])
+        self.assertEqual(perk_categories["Free card purchases"], [
+            "Swipe your card for free at any retail store at no extra charge"
+        ])
+        self.assertEqual(perk_categories["Free statements"], [
+            "Free statements on the Money app (up to 3 months)"
+        ])
+        self.assertEqual(perk_categories["Free savings pocket"], [
+            "Save and earn interest with a MyPocket savings account"
+        ])
+
+        self.assertEqual(len(perk_categories), 4)
 
 
 if __name__ == "__main__":
