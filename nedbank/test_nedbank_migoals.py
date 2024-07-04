@@ -1,5 +1,5 @@
 import unittest
-from nedbank.nedbank_migoals import *
+from nedbank_migoals import *
 from bs4 import BeautifulSoup
 
 
