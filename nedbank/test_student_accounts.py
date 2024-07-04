@@ -42,6 +42,13 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
                 <p>Switch your salary and debit orders easily on the Money app or Online Banking.</p>
                 <p>Enjoy instant access to your account on the Money app, Cellphone Banking or Online Banking.</p>
             </div>
+            <div class="card-body m-0 p-0">
+                <h5 class="card-title nb-card-heading">Security</h5>
+                <p>Accept or reject transactions on your account with access to a 24/7 anti-fraud hotline.</p>
+                <p>Block, freeze or replace your card on the Money app, Online Banking, or our 24/7 call centre.</p>
+                <p>Set payment limits or activate and deactivate your cards as needed.</p>
+                <p>Enjoy the added security of our chip-and-PIN enabled cards.</p>
+            </div>
         """
 
         soup = BeautifulSoup(mock_html, 'html.parser')
@@ -63,12 +70,17 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
             "Switch your salary and debit orders easily on the Money app or Online Banking.",
             "Enjoy instant access to your account on the Money app, Cellphone Banking or Online Banking."
         ])
+        self.assertEqual(benefit_categories["Security"], [
+            "Accept or reject transactions on your account with access to a 24/7 anti-fraud hotline.",
+            "Block, freeze or replace your card on the Money app, Online Banking, or our 24/7 call centre.",
+            "Set payment limits or activate and deactivate your cards as needed.",
+            "Enjoy the added security of our chip-and-PIN enabled cards."
+        ])
 
-
-        self.assertEqual(len(benefit_categories['Rewards and discounts']), 3)
-        self.assertEqual(len(benefit_categories['Convenience and control']), 3)
-        self.assertEqual(len(benefit_categories['Rates and fees']), 3)
-        self.assertEqual(len(benefit_categories['Security']), 0)
+        self.assertEqual(len(benefit_categories["Rewards and discounts"]), 3)
+        self.assertEqual(len(benefit_categories["Convenience and control"]), 3)
+        self.assertEqual(len(benefit_categories["Rates and fees"]), 3)
+        self.assertEqual(len(benefit_categories["Security"]), 4)
 
     def test_get_account_perks(self):
         pass
