@@ -36,6 +36,12 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
                 <p>Withdraw your Greenbacks as cash at any Nedbank ATM.</p>
                 <p>Enjoy Greenbacks Exclusive discounts on Avo SuperShop app.</p>
             </div>
+            <div class="card-body m-0 p-0">
+                <h5 class="card-title nb-card-heading">Convenience and control</h5>
+                <p>Open your account easily online.</p>
+                <p>Switch your salary and debit orders easily on the Money app or Online Banking.</p>
+                <p>Enjoy instant access to your account on the Money app, Cellphone Banking or Online Banking.</p>
+            </div>
         """
 
         soup = BeautifulSoup(mock_html, 'html.parser')
@@ -52,10 +58,15 @@ class TestMigoalsAccountFunctions(unittest.TestCase):
             "Withdraw your Greenbacks as cash at any Nedbank ATM.",
             "Enjoy Greenbacks Exclusive discounts on Avo SuperShop app."
         ])
+        self.assertEqual(benefit_categories["Convenience and control"], [
+            "Open your account easily online.",
+            "Switch your salary and debit orders easily on the Money app or Online Banking.",
+            "Enjoy instant access to your account on the Money app, Cellphone Banking or Online Banking."
+        ])
 
 
         self.assertEqual(len(benefit_categories['Rewards and discounts']), 3)
-        self.assertEqual(len(benefit_categories['Convenience and control']), 0)
+        self.assertEqual(len(benefit_categories['Convenience and control']), 3)
         self.assertEqual(len(benefit_categories['Rates and fees']), 3)
         self.assertEqual(len(benefit_categories['Security']), 0)
 
