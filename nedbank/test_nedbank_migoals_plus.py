@@ -17,6 +17,28 @@ class TestMigoalsPlusAccountFunctions(unittest.TestCase):
 
 
     def get_account_benefits(soup):
+         mock_html = """
+            <div class="nbd-way-to-pay-info">
+                <h4>Cash back on groceries</h4>
+                <p> Up to 2% cash back on your grocery spend</p>
+               
+            </div>
+            <div class="nbd-way-to-pay-info">
+                <h4>Prepaid vouchers</h4>
+                <p>Get prepaid airtime, data, electricity or water easily on the Money app or Online Banking.</p>
+                
+            </div>
+            <div class="nbd-way-to-pay-info">
+                <h4>Cash back on fuel</h4>
+                <p>25c cash back for every litre of fuel at BP</p>
+                
+            </div>
+            <div class="nbd-way-to-pay-info">
+                <h4>Free savings pocket</h4>
+                <p>Save and earn interest with MyPocket savings account</p>
+                
+            </div>
+        """
         pass
 
 
