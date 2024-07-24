@@ -97,9 +97,9 @@ def print_basics(title, description, monthly_fee):
     - description (str): The description of the account.
     - monthly_fee (str): The monthly maintenance fee of the account.
     """
-    print(f"Title: {title}")
-    print(f"Description: {description}")
-    print(f"Maintenance Fee: {monthly_fee}")
+    print(f"Title: {title}\n Description: {description}\n Maintenance Fee: {monthly_fee}")
+    # print(f"Description: {description}")
+    # print(f"Maintenance Fee: {monthly_fee}")
 
 
 def print_rewards(benefit_categories):
